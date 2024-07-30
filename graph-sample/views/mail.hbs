@@ -1,0 +1,30 @@
+<!-- Copyright (c) Microsoft Corporation.
+     Licensed under the MIT License. -->
+
+<!-- <LayoutSnippet> -->
+<h1 class="mb-3">Inbox</h1>
+<a href="#" class="btn btn-light btn-sm mb-3">New Mail</a>
+<table class="table">
+  <thead>
+    <tr>
+        <th scope="col">Date</th>
+        <th scope="col">From</th>
+        <th scope="col">Subject</th>
+        <th>Body Preview</th>
+        <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each messages}}
+      <tr>
+        <td>{{eventDateTime this.createdDateTime}}</td>
+        <td>{{this.from.emailAddress.name}}</td>
+        <td>{{this.subject}}</td>
+        <td>{{this.bodyPreview}}</td>
+        <td><a href="/mail/details/{{this.id}}">Details</a></td>
+        {{!-- <td>{{this.body.content}}</td> --}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<!-- </LayoutSnippet> -->
