@@ -24,7 +24,7 @@ router.get('/signin',
         message: 'Error getting auth URL',
         debug: JSON.stringify(error, Object.getOwnPropertyNames(error))
       });
-      res.redirect('/');
+      res.redirect('/outlook');
     }
   }
 );
@@ -64,7 +64,7 @@ router.get('/callback',
       });
     }
 
-    res.redirect('/');
+    res.redirect('/outlook');
   }
 );
 // </CallbackSnippet>
@@ -72,6 +72,7 @@ router.get('/callback',
 router.get('/signout',
   async function(req, res) {
     // Sign out
+    console.log(req.session);
     if (req.session.userId) {
       // Look up the user's account in the cache
       const accounts = await req.app.locals.msalClient
@@ -79,7 +80,7 @@ router.get('/signout',
         .getAllAccounts();
 
       const userAccount = accounts.find(a => a.homeAccountId === req.session.userId);
-
+      console.log(userAccount);
       // Remove the account
       if (userAccount) {
         req.app.locals.msalClient
@@ -90,7 +91,7 @@ router.get('/signout',
 
     // Destroy the user's session
     req.session.destroy(function () {
-      res.redirect('/');
+      res.redirect('/outlook');
     });
   }
 );
